@@ -1,0 +1,72 @@
+<header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+  <!-- Left: Sidebar toggle + Logo -->
+  <div class="flex items-center space-x-4">
+    <h1 class="text-xl font-bold uppercase" >WsCube Tech</h1>
+    <!-- Sidebar toggle button -->
+      <button id="sidebarToggle" class="focus:outline-none pr-5">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+  </div>
+  <!-- Right: Notifications + User dropdown -->
+  <div class="flex items-center space-x-6 relative">
+    <!-- Notification Icon -->
+    <button id="notificationBtn" aria-label="Notifications" class="relative focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" 
+           stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 01-3.46 0"></path>
+      </svg>
+      <!-- Notification badge -->
+      <span class="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full"></span>
+    </button>
+
+    <!-- User Icon + Dropdown -->
+    <div class="relative">
+      <button id="userBtn" aria-label="User menu" class="focus:outline-none flex items-center space-x-2">
+        <!-- User icon (simple circle) -->
+        <svg class="w-8 h-8 rounded-full bg-white text-blue-600 p-1" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/>
+          <path d="M6 20v-1c0-2.67 5.33-4 6-4s6 1.33 6 4v1H6z"/>
+        </svg>
+        <span class="hidden md:inline">User</span>
+        <!-- Down arrow -->
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" 
+             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+
+      <!-- Dropdown menu (hidden by default) -->
+      <div id="userDropdown" class="absolute right-0 mt-2 w-40 bg-white text-gray-800 rounded shadow-lg border border-gray-200 hidden z-20">
+        <a href="/profile" class="block px-4 py-2 hover:bg-blue-600 hover:text-white">Profile</a>
+        <a href="/logout" class="block px-4 py-2 hover:bg-blue-600 hover:text-white">Logout</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Sidebar toggle handler (just toggles a class, you implement actual sidebar logic)
+  document.getElementById('sidebarToggle').addEventListener('click', () => {
+    document.body.classList.toggle('sidebar-open'); // Example class
+    // Aap apne sidebar ke open/close ka logic yahan likh sakte hain
+  });
+
+  // User dropdown toggle
+  const userBtn = document.getElementById('userBtn');
+  const userDropdown = document.getElementById('userDropdown');
+
+  userBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    userDropdown.classList.toggle('hidden');
+  });
+
+  // Close dropdown if clicked outside
+  document.addEventListener('click', () => {
+    userDropdown.classList.add('hidden');
+  });
+</script>
