@@ -1,11 +1,164 @@
-<aside id="sidebar" class="w-64 bg-gray-800 text-white min-h-screen p-4 fixed transition-transform transform duration-300">
-    <nav>
-      <ul>
-        <li><a href="/" class="block py-2 hover:bg-gray-700">Dashboard</a></li>
-        <li><a href="/lead_management" class="block py-2 hover:bg-gray-700">Lead Management</a></li>
-      </ul>
-    </nav>
-  </aside>
+<!-- Sidebar -->
+<aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 border-r border-gray-700" style="background: #263238;">
+    <!-- Logo Section -->
+    <div class="p-4 flex items-center space-x-3" style="background: #007bff;">
+        <img src="/images/logo.png" alt="Logo" class="h-8">
+        <h1 class="text-xl font-semibold text-white">WsCube Tech</h1>
+    </div>
 
-  <!-- Overlay -->
-  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
+    <!-- Navigation Menu -->
+    <nav class="p-4">
+        <ul class="space-y-2">
+            <li>
+                <a href="/dashboard" class="flex items-center p-2 text-gray-100 rounded-lg hover:bg-gray-700 <%= req.path === '/dashboard' ? 'bg-gray-700' : '' %>">
+                    <svg class="w-5 h-5 <%= req.path === '/dashboard' ? 'text-white' : 'text-gray-400' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="ml-3">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+              <button type="button" class="flex items-center w-full p-2 text-gray-100 rounded-lg hover:bg-gray-700" onclick="toggleUserManagement()">
+                  <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap">Users Management</span>
+                  <svg id="userManagementArrow" class="w-3 h-3 transition-transform duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                  </svg>
+              </button>
+              <ul id="user-management-dropdown" class="hidden py-2 space-y-2">
+                  <li>
+                      <a href="/users" class="flex items-center p-2 text-gray-100 rounded-lg hover:bg-gray-700 <%= req.path === '/users' ? 'bg-gray-700' : '' %>">
+                          <svg class="w-5 h-5 <%= req.path === '/users' ? 'text-white' : 'text-gray-400' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                          </svg>
+                          <span class="ml-3">Users</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+
+
+            <li>
+                <button type="button" class="flex items-center w-full p-2 text-gray-100 rounded-lg hover:bg-gray-700" onclick="toggleLeadManagement()">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="flex-1 ml-3 text-left whitespace-nowrap">Lead Management</span>
+                    <svg id="leadManagementArrow" class="w-3 h-3 transition-transform duration-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+                <ul id="lead-management-dropdown" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="/leads" class="flex items-center p-2 text-gray-100 rounded-lg hover:bg-gray-700 <%= req.path === '/leads' ? 'bg-gray-700' : '' %>">
+                            <svg class="w-5 h-5 <%= req.path === '/leads' ? 'text-white' : 'text-gray-400' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            <span class="ml-3">Manage Leads</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+        </ul>
+    </nav>
+</aside>
+
+<!-- Overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 z-30 bg-gray-900 bg-opacity-50 hidden"></div>
+
+<!-- Sidebar Toggle Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const overlay = document.getElementById('sidebarOverlay');
+        const mainContent = document.querySelector('.ml-64');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            mainContent.classList.toggle('ml-64');
+            mainContent.classList.toggle('ml-0');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', toggleSidebar);
+        }
+        
+        if (overlay) {
+            overlay.addEventListener('click', toggleSidebar);
+        }
+
+        // Handle responsive behavior
+        function handleResize() {
+            if (window.innerWidth < 768) {
+                sidebar.classList.add('-translate-x-full');
+                mainContent.classList.remove('ml-64');
+                mainContent.classList.add('ml-0');
+                overlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            } else {
+                sidebar.classList.remove('-translate-x-full');
+                mainContent.classList.add('ml-64');
+                mainContent.classList.remove('ml-0');
+                overlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        // Initial check
+        handleResize();
+
+        // Listen for resize events
+        window.addEventListener('resize', handleResize);
+    });
+
+    // Function to toggle Lead Management dropdown
+    function toggleLeadManagement() {
+        const dropdown = document.getElementById('lead-management-dropdown');
+        const arrow = document.getElementById('leadManagementArrow');
+        
+        if (dropdown.classList.contains('hidden')) {
+            dropdown.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+        } else {
+            dropdown.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+        }
+    }
+
+    // Function to toggle User Management dropdown
+    function toggleUserManagement() {
+        const dropdown = document.getElementById('user-management-dropdown');
+        const arrow = document.getElementById('userManagementArrow');
+        
+        if (dropdown.classList.contains('hidden')) {
+            dropdown.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+        } else {
+            dropdown.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+        }
+    }
+
+    // Show dropdowns if current path matches
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.pathname === '/leads') {
+            const dropdown = document.getElementById('lead-management-dropdown');
+            const arrow = document.getElementById('leadManagementArrow');
+            dropdown.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+        }
+        if (window.location.pathname === '/users') {
+            const dropdown = document.getElementById('user-management-dropdown');
+            const arrow = document.getElementById('userManagementArrow');
+            dropdown.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+        }
+    });
+</script>

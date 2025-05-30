@@ -1,22 +1,37 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "bcryptjs": "^3.0.2",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
+    "googleapis": "^149.0.0",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.16.0"
-  }
+    "nodemailer": "^7.0.3",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tripathi-adarsh/demo-node-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tripathi-adarsh/demo-node-project/issues"
+  },
+  "homepage": "https://github.com/tripathi-adarsh/demo-node-project#readme",
+  "description": ""
 }

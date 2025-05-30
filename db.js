@@ -2,11 +2,11 @@ require('dotenv').config();
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: process.env.DB_USERNAME,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  user: 'wscubestaging',
+  host: 'wscubetech-staging.cd0cisqwq1ta.ap-south-1.rds.amazonaws.com',
+  database: 'crm_staging_new',
+  password: 'TKJkEjBkQzggab9',
+  port: 5432,
   ssl: { rejectUnauthorized: false }
 });
 
